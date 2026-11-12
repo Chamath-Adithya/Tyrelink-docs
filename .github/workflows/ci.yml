@@ -1,0 +1,65 @@
+name: Tyrelink Documentation CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate-docs:
+    name: Verify Documentation Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify Documentation Structure & Files
+        run: |
+          python3 - << 'EOF'
+          import os
+          import sys
+
+          required_files = [
+              "README.md",
+              "docs/ARCHITECTURE.md",
+              "docs/PLAN.md",
+              "docs/SECURITY.md",
+              "docs/API-CONTRACT.md",
+              "docs/RELEASE-RUNBOOK.md",
+              "docs/REPOSITORIES.md",
+              "docs/SECURITY-RELEASE-CHECKLIST.md",
+              "docs/PRODUCT-CONTENT-RULES.md",
+          ]
+
+          errors = []
+          print("🔍 Validating Tyrelink documentation files...")
+
+          for rel_path in required_files:
+              if not os.path.exists(rel_path):
+                  errors.append(f"Missing required file: {rel_path}")
+                  continue
+              size = os.path.getsize(rel_path)
+              if size < 50:
+                  errors.append(f"File {rel_path} is suspiciously small ({size} bytes)")
+              with open(rel_path, "r", encoding="utf-8") as f:
+                  content = f.read()
+                  lines = content.splitlines()
+                  if not lines or not lines[0].startswith("#"):
+                      errors.append(f"File {rel_path} does not start with an H1 (#) title")
+              print(f"  ✓ {rel_path} ({size} bytes, {len(lines)} lines)")
+
+          if errors:
+              print("\n❌ Documentation validation failed:")
+              for err in errors:
+                  print(f"  - {err}")
+              sys.exit(1)
+
+          print("\n✅ All required documentation files are valid, formatted, and non-empty.")
+          EOF
