@@ -23,5 +23,5 @@ The original `Tyrelink-web` monorepo is retained as a migration/reference reposi
 2. Apply migrations and deploy API to a canary VPS process.
 3. Verify `/health`, database connectivity and smoke endpoints.
 4. Build and deploy frontend.
-5. Verify checkout/WhatsApp, warranty, tracking and admin smoke journeys.
+5. Verify checkout/WhatsApp, catalog, contact and admin smoke journeys.
 6. Record the release and rollback commit in the change log.

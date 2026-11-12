@@ -13,10 +13,6 @@ not expose sequential database identifiers.
   body-size limits and idempotency protection.
 - `POST /v1/order-leads/{id}/whatsapp-link` — creates a user-initiated,
   prefilled WhatsApp handoff. It is not order confirmation.
-- `GET /v1/warranty/{reference}` and `GET /v1/orders/{reference}` — only after
-  privacy-safe authenticated or possession-based lookup is implemented; do not
-  expose enumerable records.
-
 ## Admin boundary
 
 Admin CRUD is authenticated server-side with HttpOnly/Secure/SameSite sessions,

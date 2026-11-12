@@ -20,7 +20,7 @@ Tyrelink-web/
 
 - Storefront: home, shop, categories, product detail, search, filters and related products.
 - Conversion: cart-like selection, quick WhatsApp order modal, lead capture before redirect and floating WhatsApp support.
-- Trust: warranty checker, order tracking, policies, FAQ, contact and about pages.
+- Trust: FAQ, contact and about pages.
 - Admin: authenticated product/catalogue editor, campaigns, featured/trending controls and lead status management.
 - Tyrelink-specific: vehicle/size fitment finder, tyre-age/manufacture-date fields, fitting locations, garage packages, delivery coverage and Sinhala content.
 
